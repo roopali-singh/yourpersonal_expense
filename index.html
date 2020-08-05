@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Expense</title>
+    <!-- <link rel="stylesheet" href="main.css">     -->
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+    <!-- <script src="main.jss"></script> -->
+    
+</head>
+<body>
+    <h2 id="headingTotal">0</h2>
+    <input id="inputAmount" type="text"></input>
+    <button id="btnAddExpense">+</button>
+    <script>
+
+        //Get the heading emement
+        const headingEl = document.querySelector("#headingTotal")
+
+        //init the value of expense at 0
+        let totalExpense = 0;
+
+        //Set the heading element to totalExpense
+        headingEl.textContent = totalExpense;
+        //On btn click add input value to total expense
+        function addExpenseToTotal()
+        {
+            // read value from inputAmount
+            const inputElement = document.querySelector("#inputAmount");
+            const textAmount = inputAmount.value;
+
+            // convert it to number
+            const expense = parseInt(textAmount, 10);
+            
+            //add that value to tatal expense
+            totalExpense= totalExpense + expense;
+            console.log({ totalExpense });
+
+            //Set the heading  element to tatal expense
+            headingEl.textContent = totalExpense;
+
+
+        }
+        
+        //get the button selecctor
+        const element = document.querySelector("#btnAddExpense");
+
+        //listen to click event
+        element.addEventListener("click", addExpenseToTotal, false);
+
+    </script>
+</body>
+</html>
