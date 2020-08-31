@@ -105,6 +105,7 @@
             //put everything in expenseItem object
             expenseItem.desc = textDesc;
             expenseItem.amount = expense;
+            expenseItem.moment = new Date();
 
             allExpenses.push(expenseItem);
 
@@ -125,13 +126,22 @@
 
 
         }
+
+
+        //Controller Function(getDateString)
+            
+        function getDateString(moment){
+            return moment.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
+        }
+
+
         // View Layer
-        function createListItem({ desc, amount }) {
+        function createListItem({ desc, amount, moment }) {
             return `
                 
                 <li class="list-group-item d-flex w-100 justify-content-between">
                     <div class="d-flex flex-column">${desc}
-                        <small class="text-muted">August 31, 2020</small>
+                        <small class="text-muted">${getDateString(moment)}</small>
                     </div>
 
                     <div>
