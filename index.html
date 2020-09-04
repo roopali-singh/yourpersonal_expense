@@ -118,24 +118,55 @@
             //Set the heading  element to tatal expense
             headingEl.textContent = someText;
 
-            const allExpenseHTML = allExpenses.map(expense1 => createListItem(expense1));
-
-            joinAllExpenseHTML = allExpenseHTML.join("");
-
-            expenseTableEl.innerHTML = joinAllExpenseHTML;
-
+            renderList(allExpenses);
 
         }
 
 
-        //Controller Function(getDateString)
-            
-        function getDateString(moment){
-            return moment.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
+        //Controller Function
+
+        //Get Date String
+
+        function getDateString(now) {
+            return now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+        }
+
+        //Delete Items
+
+        function deleteItem(dateValue) {
+
+            // const newArr = [];
+
+            // for (let i = 0; i < allExpenses.length; i++) {
+            //     if (allExpenses[i].moment.valueOf() !== dateValue) {
+            //         newArr.push(allExpenses[i]);
+            //     }
+            // }
+                                //or
+            // const newArr = allExpenses.filter((expense1) => {
+            //     if(expense1.moment.valueOf() !== dateValue){
+            //         return expense1;
+            //     }
+            // });
+
+            const newArr = allExpenses.filter(expense1 => expense1.moment.valueOf() !== dateValue);
+
+            renderList(newArr);
         }
 
 
         // View Layer
+
+        //Printing the newArr
+        function renderList(arrOfList) {
+
+            const allExpenseHTML = arrOfList.map(expense1 => createListItem(expense1));
+            const joinAllExpenseHTML = allExpenseHTML.join("");
+            expenseTableEl.innerHTML = joinAllExpenseHTML;
+
+        }
+
+        //The List
         function createListItem({ desc, amount, moment }) {
             return `
                 
@@ -146,7 +177,8 @@
 
                     <div>
                         <span class="px-5">${amount}</span>
-                        <button class="btn btn-outline-danger btn-sm" type="button">
+                        <button class="btn btn-outline-danger btn-sm" type="button"
+                        onclick="deleteItem(${moment.valueOf()})">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </div>
@@ -161,6 +193,6 @@
         element.addEventListener("click", addExpenseToTotal, false);
 
     </script>
-</body>
+    <input type="number" </body>
 
 </html>
